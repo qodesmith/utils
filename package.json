@@ -1,7 +1,15 @@
 {
   "name": "@qodestack/utils",
+  "version": "1.0.0",
+  "description": "Useful utility functions",
   "module": "index.ts",
   "type": "module",
+  "author": "Qodesmith",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qodesmith/utils.git"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
