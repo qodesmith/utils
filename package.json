@@ -9,16 +9,16 @@
   "author": "Qodesmith",
   "license": "MIT",
   "sideEffects": false,
+  "scripts": {
+    "build": "bun run build.ts",
+    "publishPackage": "bun run build && npm publish"
+  },
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qodesmith/utils.git"
-  },
-  "scripts": {
-    "build": "bun run build.ts",
-    "publishPackage": "bun run build && npm publish"
   },
   "devDependencies": {
     "@types/bun": "latest",
