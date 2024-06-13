@@ -18,6 +18,24 @@ function logger(type: keyof typeof ansi, messages: any[]) {
   console.log(...items)
 }
 
+/**
+ * Logs with color and a date! Each log line is preceded by a date in the form
+ * of `[6/13/2024, 9:45:57 AM]`. Objects are not colored and are logged as is.
+ *
+ * The following methods are available:
+ *
+ * `text`: The same a `console.log`. No color output is applied.
+ *
+ * `success`: A green (or aqua) color is applied to the log.
+ *
+ * `error`: A red color is applied to the log.
+ *
+ * `warning`: A yellow color is applied to the log.
+ *
+ * Examples:
+ *
+ * `log.text('Hello!')` => `[6/13/2024, 9:45:57 AM] Hello!`
+ */
 export const log = {
   text(...items: any[]) {
     console.log(`[${getLocalDate()}]`, ...items)
