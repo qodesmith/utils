@@ -3,15 +3,22 @@
   "version": "1.0.0",
   "description": "Useful utility functions",
   "module": "index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "author": "Qodesmith",
   "license": "MIT",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qodesmith/utils.git"
   },
+  "scripts": {
+    "build": "bun run build.ts"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "bun-plugin-dts": "^0.2.3"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
