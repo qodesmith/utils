@@ -50,3 +50,26 @@ export const log = {
     logger('warning', items)
   },
 }
+
+/**
+ * A convenience export so consumers can implement a conditional "silent" logger
+ * without having to stub this object themselves, leaving the business logic
+ * untouched.
+ *
+ * Example:
+ *
+ * ```
+ * import {log, emptyLog} from '@qodesmith/utils'
+ *
+ * const logger = silent ? emptyLog : log
+ *
+ * // Business logic...
+ * logger.text('Hello world!')
+ * ```
+ */
+export const emptyLog = {
+  text() {},
+  success() {},
+  error() {},
+  warning() {},
+}
