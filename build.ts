@@ -9,7 +9,7 @@ const start = performance.now()
  * `index.ts` file so we don't "forget to add that last module we just created."
  */
 const contents = fs.readdirSync('./src').reduce<string[]>((acc, item) => {
-  if (!item.endsWith('.ts')) return acc
+  if (!item.endsWith('.ts') || item.endsWith('.test.ts')) return acc
 
   const parsedItem = path.parse(item)
   acc.push(`export * from './src/${parsedItem.name}'`)
