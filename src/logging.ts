@@ -68,8 +68,8 @@ export const log = {
  * ```
  */
 export const emptyLog = {
-  text() {},
-  success() {},
-  error() {},
-  warning() {},
+  text(...items: any[]) {},
+  success(...items: any[]) {},
+  error(...items: any[]) {},
+  warning(...items: any[]) {},
 }
