@@ -1,3 +1,5 @@
 export * from './src/dates'
+export * from './src/errors'
 export * from './src/wait'
+export * from './src/arrays'
 export * from './src/logging'
