@@ -36,19 +36,23 @@ function logger(type: keyof typeof ansi, messages: any[]) {
  *
  * `log.text('Hello!')` => `[6/13/2024, 9:45:57 AM] Hello!`
  */
-export const log = {
-  text(...items: any[]) {
-    console.log(`[${getLocalDate()}]`, ...items)
-  },
-  success(...items: any[]) {
-    logger('success', items)
-  },
-  error(...items: any[]) {
-    logger('error', items)
-  },
-  warning(...items: any[]) {
-    logger('warning', items)
-  },
+export function createLogger({timeZone}: {timeZone?: string} = {}) {
+  const log = {
+    text(...items: any[]) {
+      console.log(`[${getLocalDate(timeZone)}]`, ...items)
+    },
+    success(...items: any[]) {
+      logger('success', items)
+    },
+    error(...items: any[]) {
+      logger('error', items)
+    },
+    warning(...items: any[]) {
+      logger('warning', items)
+    },
+  }
+
+  return log
 }
 
 /**

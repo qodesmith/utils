@@ -6,10 +6,11 @@ import {
   setSystemTime,
   spyOn,
 } from 'bun:test'
-import {log, emptyLog} from './logging'
+import {createLogger, emptyLog} from './logging'
 
 const spy = spyOn(console, 'log')
-process.env.TZ = 'America/New_York'
+const timeZone = 'America/New_York'
+process.env.TZ = timeZone
 
 beforeAll(() => {
   setSystemTime(new Date(1718468598753))
@@ -29,6 +30,8 @@ test('emptyLog', () => {
 })
 
 test('log', () => {
+  const log = createLogger({timeZone})
+
   log.text('test')
   log.warning('test 2')
   log.error('test 3')
