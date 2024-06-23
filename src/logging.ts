@@ -1,14 +1,13 @@
 import {getLocalDate} from './dates'
+import {ansiColors} from './internal/ansiColors'
 
-const ansi = {
-  success: '\x1b[32m%s\x1b[0m',
-  error: '\x1b[31m%s\x1b[0m',
-  warning: '\x1b[33m%s\x1b[0m',
-}
-
-function logger(type: keyof typeof ansi, messages: any[]) {
-  const ansiStr = ansi[type]
-  const items = [ansiStr, `[${getLocalDate()}]`].concat(
+function logger(
+  type: keyof typeof ansiColors,
+  timeZone: string | undefined,
+  messages: any[]
+) {
+  const ansiStr = ansiColors[type]
+  const items = [ansiStr, `[${getLocalDate(timeZone)}]`].concat(
     messages.flatMap(item => {
       const isObj = typeof item === 'object' || typeof item === 'function'
       return isObj ? [item] : [ansiStr, item]
@@ -42,13 +41,13 @@ export function createLogger({timeZone}: {timeZone?: string} = {}) {
       console.log(`[${getLocalDate(timeZone)}]`, ...items)
     },
     success(...items: any[]) {
-      logger('success', items)
+      logger('success', timeZone, items)
     },
     error(...items: any[]) {
-      logger('error', items)
+      logger('error', timeZone, items)
     },
     warning(...items: any[]) {
-      logger('warning', items)
+      logger('warning', timeZone, items)
     },
   }
 
