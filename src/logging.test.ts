@@ -7,6 +7,7 @@ import {
   spyOn,
 } from 'bun:test'
 import {createLogger, emptyLog} from './logging'
+import {ansiColors} from './internal/ansiColors'
 
 const spy = spyOn(console, 'log')
 const timeZone = 'America/New_York'
@@ -30,7 +31,7 @@ test('emptyLog', () => {
 })
 
 test('log', () => {
-  const log = createLogger({timeZone})
+  const log = createLogger({timeZone: 'Australia/Sydney'})
 
   log.text('test')
   log.warning('test 2')
@@ -38,5 +39,24 @@ test('log', () => {
   log.success('test 4')
 
   expect(spy).toHaveBeenCalledTimes(4)
-  expect(spy).toHaveBeenCalledWith('[6/15/2024, 12:23:18 PM]', 'test')
+
+  expect(spy).toHaveBeenCalledWith('[6/16/2024, 2:23:18 AM]', 'test')
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.warning,
+    '[6/16/2024, 2:23:18 AM]',
+    ansiColors.warning,
+    'test 2'
+  )
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.error,
+    '[6/16/2024, 2:23:18 AM]',
+    ansiColors.error,
+    'test 3'
+  )
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.success,
+    '[6/16/2024, 2:23:18 AM]',
+    ansiColors.success,
+    'test 4'
+  )
 })
