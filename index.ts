@@ -1,3 +1,4 @@
+export * from './src/debounce'
 export * from './src/dates'
 export * from './src/invariant'
 export * from './src/errors'
