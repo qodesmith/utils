@@ -52,5 +52,3 @@ export function bytesToSize(bytes: number): string {
     return '0 bytes'
   }
 }
-
-console.log(bytesToSize(1024))
