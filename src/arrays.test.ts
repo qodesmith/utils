@@ -1,5 +1,5 @@
 import {expect, test} from 'bun:test'
-import {chunkArray} from './arrays'
+import {chunkArray, shuffleArray} from './arrays'
 
 test('chunkArray', () => {
   const arr = [1, 2, 3, 4, 5, 6, 7]
@@ -11,4 +11,23 @@ test('chunkArray', () => {
   const chunked32Arr = chunkArray(float32Arr, 3)
 
   expect(chunked32Arr).toEqual([[1, 2, 3], [4, 5, 6], [7]])
+})
+
+test('shuffleArray', () => {
+  const arr = Array.from({length: 10}, (_, i) => ({i}))
+  const shuffledArr = shuffleArray(arr)
+
+  const originalArrIsShuffled = arr.reduce<boolean>((acc, {i}, idx) => {
+    if (i !== idx) return true
+    return acc
+  }, false)
+
+  const isShuffled = shuffledArr.reduce<boolean>((acc, {i}, idx) => {
+    if (i !== idx) return true
+    return acc
+  }, false)
+
+  expect(originalArrIsShuffled).toBeFalse()
+  expect(isShuffled).toBeTrue()
+  expect(arr).not.toBe(shuffledArr)
 })
