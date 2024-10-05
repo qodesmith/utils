@@ -8,14 +8,17 @@ const start = performance.now()
  * Get a list of all the modules in this project to dynamically construct an
  * `index.ts` file so we don't "forget to add that last module we just created."
  */
-const contents = fs.readdirSync('./src').reduce<string[]>((acc, item) => {
-  if (!item.endsWith('.ts') || item.endsWith('.test.ts')) return acc
+const contents = fs
+  .readdirSync('./src')
+  .reduce<string[]>((acc, item) => {
+    if (!item.endsWith('.ts') || item.endsWith('.test.ts')) return acc
 
-  const parsedItem = path.parse(item)
-  acc.push(`export * from './src/${parsedItem.name}'`)
+    const parsedItem = path.parse(item)
+    acc.push(`export * from './src/${parsedItem.name}'`)
 
-  return acc
-}, [])
+    return acc
+  }, [])
+  .sort()
 
 await Bun.write('./index.ts', `${contents.join('\n')}\n`)
 
