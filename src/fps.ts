@@ -1,8 +1,11 @@
 /**
- * Get the frames per second for the current browser. Uses
- * `requestAnimationFrame` over a 1 second period to determine the FPS.
+ * Get the frames per second for the current browser.
  *
- * Executes a callback function with a number representing the FPS.
+ * This function uses `requestAnimationFrame` over a 1 second period to
+ * determine the FPS. It executes a callback function with a number representing
+ * the calculated FPS.
+ *
+ * @param {function} cb - Callback function that receives the calculated FPS as a parameter.
  */
 export function getFps<T>(cb: (num: number) => T) {
   let count = 0
@@ -27,12 +30,13 @@ export function getFps<T>(cb: (num: number) => T) {
 }
 
 /**
- * Async / promise-based version of `getFps`.
+ * Get the frames per second for the current browser asynchronously.
  *
- * Get the frames per second for the current browser. Uses
- * `requestAnimationFrame` over a 1 second period to determine the FPS.
+ * This function uses `requestAnimationFrame` over a 1 second period to
+ * determine the FPS. It returns a promise that resolves to a number
+ * representing the calculated FPS.
  *
- * Returns a promise resolving to a number representing the FPS.
+ * @returns {Promise<number>} A promise that resolves to the calculated FPS.
  */
 export async function genFps(): Promise<number> {
   return new Promise<number>(resolve => getFps(resolve))

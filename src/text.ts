@@ -1,11 +1,14 @@
 /**
- * Pluralize a word.
+ * Pluralizes a word based on the given amount.
  *
- * ```
+ * @param {number|string} amount - The quantity to determine pluralization
+ * @param {string} word - The word to be pluralized
+ * @returns {string} A string combining the amount and the pluralized word
+ *
+ * @example
  * pluralize(3, 'apple') // '3 apples'
  * pluralize('0', 'apple') // '0 apples'
  * pluralize(1, 'apple') // '1 apple'
- * ```
  */
 export function pluralize(amount: number | string, word: string): string {
   const s = +amount === 1 ? '' : 's'
@@ -13,15 +16,17 @@ export function pluralize(amount: number | string, word: string): string {
 }
 
 /**
- * Convert seconds to a time duration separated by colons. Only goes up to
- * hours, does not show days.
+ * Converts a number of seconds into a formatted duration string, separated by
+ * colons.
  *
- * ```
- * secondsToDuration(24) => '0:24'
- * secondsToDuration(60) => '1:00'
- * secondsToDuration(3600) => '1:00:00'
- * secondsToDuration(24 * 60 * 60 * 2 + 1) => '48:00:01'
- * ```
+ * @param {number} totalSeconds - The total number of seconds to convert
+ * @returns {string} A formatted string representing the duration in hours:minutes:seconds or minutes:seconds
+ *
+ * @example
+ * secondsToDuration(24) // '0:24'
+ * secondsToDuration(60) // '1:00'
+ * secondsToDuration(3600) // '1:00:00'
+ * secondsToDuration(24 * 60 * 60 * 2 + 1) // '48:00:01'
  */
 export function secondsToDuration(totalSeconds: number): string {
   // Ensure the input is a non-negative integer

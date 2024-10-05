@@ -18,8 +18,10 @@ function logger(
 }
 
 /**
- * Logs with color and a date! Each log line is preceded by a date in the form
- * of `[6/13/2024, 9:45:57 AM]`. Objects are not colored and are logged as is.
+ * Creates a logger object with colored and timestamped logging methods.
+ *
+ * Each log line is preceded by a date in the form of `[6/13/2024, 9:45:57 AM]`.
+ * Objects are not colored and are logged as is.
  *
  * The following methods are available:
  *
@@ -31,9 +33,12 @@ function logger(
  *
  * `warning`: A yellow color is applied to the log.
  *
- * Examples:
+ * @param {Object} options - The options for creating the logger.
+ * @param {string} [options.timeZone] - The time zone to use for timestamps.
+ * @returns {Object} An object with logging methods: `text`, `success`, `error`, and `warning`.
  *
- * `log.text('Hello!')` => `[6/13/2024, 9:45:57 AM] Hello!`
+ * @example
+ * log.text('Hello!') // `[6/13/2024, 9:45:57 AM] Hello!`
  */
 export function createLogger({timeZone}: {timeZone?: string} = {}) {
   const log = {

@@ -1,13 +1,14 @@
 /**
- * Chunks an array. TypedArray's (i.e. `Float32Array`, `Uint16Array`, etc.) will
- * be chunked into regular arrays. Each chunk will contain the numeric values
- * from the original typed array as standard numbers rather than in the typed
- * array format.
+ * Chunks an array into smaller arrays of a specified size.
+ * Works with regular arrays and TypedArrays.
  *
- * ```
- * const arr = [1, 2, 3, 4, 5, 6]
- * const newArr = chunkArray(arr, 2) // [[1, 2], [3, 4], [5, 6]]
- * ```
+ * @param {ArrayLike<T>} arr - The array to be chunked.
+ * @param {number} size - The size of each chunk.
+ * @returns {T[][]} An array of chunked arrays.
+ *
+ * @example
+ * const arr = [1, 2, 3, 4, 5, 6];
+ * const newArr = chunkArray(arr, 2); // [[1, 2], [3, 4], [5, 6]]
  */
 export function chunkArray<T>(arr: ArrayLike<T>, size: number): T[][] {
   const length = arr.length
@@ -29,7 +30,14 @@ export function chunkArray<T>(arr: ArrayLike<T>, size: number): T[][] {
 }
 
 /**
- * Shuffles / randomizes an array.
+ * Shuffles the elements of an array randomly.
+ *
+ * @param {T[]} array - The array to be shuffled.
+ * @returns {T[]} A new array with the same elements in a random order.
+ *
+ * @example
+ * const arr = [1, 2, 3, 4, 5];
+ * const shuffledArr = shuffleArray(arr); // [3, 1, 5, 2, 4] (random order)
  */
 export function shuffleArray<T>(array: T[]): T[] {
   // Create a copy of the original array to avoid modifying it directly

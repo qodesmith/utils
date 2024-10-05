@@ -1,9 +1,14 @@
 /**
- * Massages a float into a consistent decimal format as a string. Examples:
+ * Formats a floating-point number to a consistent decimal representation as a
+ * string. Trims trailing zeros and removes unnecessary decimal points.
  *
- * - 2.1091 => 2.11
- * - 2.0    => 2
- * - 2.10   => 2.1
+ * @param {number} num - The number to format.
+ * @returns {string} The formatted number as a string.
+ *
+ * @example
+ * sanitizeDecimal(2.1091); // "2.11"
+ * sanitizeDecimal(2.0);    // "2"
+ * sanitizeDecimal(2.10);   // "2.1"
  */
 export function sanitizeDecimal(num: number): string {
   return (
@@ -33,9 +38,17 @@ export function sanitizeDecimal(num: number): string {
 }
 
 /**
- * Converts a number of bytes into human-readable text:
+ * Converts a number of bytes into a human-readable string representation.
+ * Uses the most appropriate unit (GB, MB, KB, or bytes) based on the size.
  *
- * -
+ * @param {number} bytes - The number of bytes to convert.
+ * @returns {string} A string representing the size in the most appropriate unit (GB, MB, KB, or bytes).
+ *
+ * @example
+ * bytesToSize(1500000); // "1.43 MB"
+ * bytesToSize(1024);    // "1 KB"
+ * bytesToSize(1);       // "1 byte"
+ * bytesToSize(0);       // "0 bytes"
  */
 export function bytesToSize(bytes: number): string {
   if (bytes >= 1073741824) {
