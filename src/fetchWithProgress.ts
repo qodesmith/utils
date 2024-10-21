@@ -36,7 +36,11 @@ export async function fetchWithProgress({
   }
 
   const contentLengthHeaderName = contentLengthHeader ?? 'Content-Length'
-  const contentLengthHeaderValue = response.headers.get(contentLengthHeaderName)
+
+  // If a header name was provided but still not found, default to `Content-Length`
+  const contentLengthHeaderValue =
+    response.headers.get(contentLengthHeaderName) ??
+    response.headers.get('Content-Length')
 
   if (!contentLengthHeaderValue) {
     throw new Error(`No ${contentLengthHeaderName} header found`)
