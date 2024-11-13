@@ -2,6 +2,7 @@ type FetchWithProgressInput = {
   url: string
   onProgress: (progressPercent: number) => void
   contentLengthHeader?: string
+  options?: Parameters<typeof fetch>[1]
 }
 
 /**
@@ -11,6 +12,7 @@ type FetchWithProgressInput = {
  * @param {string} input.url - The URL to fetch.
  * @param {function} input.onProgress - Callback function to track progress, receives a percentage.
  * @param {string} [input.contentLengthHeader] - Optional custom header name for content length. Defaults to `Content-Length`.
+ * @param {object} [input.options] - Optional fetch options. Defaults to `undefined`.
  *
  * @returns {Promise<Response>} - A promise that resolves to the Response object.
  *
@@ -27,8 +29,9 @@ export async function fetchWithProgress({
   url,
   onProgress,
   contentLengthHeader,
+  options,
 }: FetchWithProgressInput): Promise<Response> {
-  const response = await fetch(url)
+  const response = await fetch(url, options)
   const reader = response.body?.getReader()
 
   if (!reader) {
