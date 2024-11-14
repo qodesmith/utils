@@ -61,7 +61,7 @@ export async function fetchWithProgress({
   const chunks: (Uint8Array | undefined)[] = []
 
   while (true) {
-    const {done, value} = (await reader?.read()) ?? {}
+    const {done, value} = await reader.read()
     if (done) break
 
     chunks.push(value)
