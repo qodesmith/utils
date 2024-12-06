@@ -9,6 +9,7 @@
   "author": "Qodesmith",
   "license": "MIT",
   "sideEffects": false,
+  "prettier": "@qodestack/prettier-config",
   "scripts": {
     "test": "bun test",
     "build": "bun run build.ts",
@@ -22,6 +23,7 @@
     "url": "git+https://github.com/qodesmith/utils.git"
   },
   "devDependencies": {
+    "@qodestack/prettier-config": "^1.0.2",
     "@types/bun": "latest",
     "bun-plugin-dts": "^0.3.0"
   },
