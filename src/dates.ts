@@ -21,3 +21,23 @@
 export function getLocalDate(timeZone?: string) {
   return new Date().toLocaleString('en-US', {timeZone})
 }
+
+/**
+ * Checks if a value is a valid JavaScript Date object.
+ *
+ * @param {unknown} date - The value to check.
+ * @returns {boolean} `true` if the value is a valid Date object, `false` otherwise.
+ * @example
+ * // Valid date
+ * isValidDate(new Date()); // true
+ *
+ * // Invalid date
+ * isValidDate(new Date('nope')); // false
+ */
+export function isValidDate(date: unknown): boolean {
+  if (!(date instanceof Date)) {
+    return false
+  }
+
+  return !isNaN(date.getTime())
+}
