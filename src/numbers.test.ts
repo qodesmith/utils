@@ -1,5 +1,5 @@
 import {expect, test} from 'bun:test'
-import {bytesToSize, sanitizeDecimal} from './numbers'
+import {bytesToSize, getRandomNumber, sanitizeDecimal} from './numbers'
 
 test('sanitizeDecimal', () => {
   expect(sanitizeDecimal(2.1091)).toBe('2.11')
@@ -18,4 +18,25 @@ test('bytesToSize', () => {
   expect(bytesToSize(1024 * 1024)).toBe('1 MB')
   expect(bytesToSize(1024 * 1024 * 1024)).toBe('1 GB')
   expect(bytesToSize(1024 * 1024 * 1024 * 1001)).toBe('1001 GB')
+})
+
+test('getRandomNumber', () => {
+  const min = -5
+  const max = 5
+  const numSet = new Set<number>()
+
+  for (let i = 0; i < 10_000; i++) {
+    const num = getRandomNumber(min, max)
+    numSet.add(num)
+
+    expect(num).toBeNumber()
+    expect(num).toBeGreaterThanOrEqual(min)
+    expect(num).toBeLessThanOrEqual(max)
+  }
+
+  expect(numSet.size).toBe(Math.abs(min - max) + 1)
+
+  for (let i = min; i <= max; i++) {
+    expect(numSet.has(i)).toBeTrue()
+  }
 })

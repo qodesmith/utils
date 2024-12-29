@@ -65,3 +65,14 @@ export function bytesToSize(bytes: number): string {
     return '0 bytes'
   }
 }
+
+/**
+ * Generates a random number between the specified minimum and maximum values, inclusive.
+ *
+ * @param {number} min - The minimum value.
+ * @param {number} max - The maximum value.
+ * @returns {number} A random number between min and max, inclusive.
+ */
+export function getRandomNumber(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
