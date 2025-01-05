@@ -49,3 +49,30 @@ export function secondsToDuration(totalSeconds: number): string {
   // If no hours, just return minutes and seconds
   return `${minutes}:${formattedSeconds}`
 }
+
+/**
+ * Provides BASIC slug creation functionality. The result is a url-safe string
+ * with the following rules:
+ * - Upper and lowercase letters allowed
+ * - Numbers allowed
+ * - `-_.~` are the only special characters allowed
+ * - Leading and trailing spaces are trimmed
+ * - Spaces are converted to `-`
+ * - Consecutive `-` will be reduced to a single `-`
+ */
+export function slugify(text: string): string {
+  return (
+    text
+      // Remove any character that is not a letter, number, space, or -_.~
+      .replace(/[^a-zA-Z0-9-_.~ ]/g, '')
+
+      // Get rid of leading and trailing spaces
+      .trim()
+
+      // Replace spaces with hyphens
+      .replace(/\s+/g, '-')
+
+      // Replace consecutive hyphens with a single hyphen
+      .replace(/-+/g, '-')
+  )
+}

@@ -1,5 +1,5 @@
 import {expect, test} from 'bun:test'
-import {pluralize, secondsToDuration} from './text'
+import {pluralize, secondsToDuration, slugify} from './text'
 
 test('pluralize', () => {
   const results = [
@@ -20,4 +20,21 @@ test('secondsToDuration', () => {
   expect(secondsToDuration(24 * 60 * 60)).toBe('24:00:00')
   expect(secondsToDuration(24 * 60 * 60 + 1)).toBe('24:00:01')
   expect(secondsToDuration(24 * 60 * 60 * 2 + 1)).toBe('48:00:01')
+})
+
+test('slugify', () => {
+  expect(slugify('  Hello World  ')).toBe('Hello-World')
+  expect(slugify('Hello@#World!')).toBe('HelloWorld')
+  expect(slugify('Hello     World')).toBe('Hello-World')
+  expect(slugify('Hello$%^&*()World')).toBe('HelloWorld')
+  expect(slugify('Hello---World')).toBe('Hello-World')
+  expect(slugify('a-zA-Z0-9-_.~')).toBe('a-zA-Z0-9-_.~')
+  expect(slugify('')).toBe('')
+  expect(slugify('     ')).toBe('')
+  expect(slugify('@#$%^&*()')).toBe('')
+  expect(slugify('  Hello  @#$ World!! ~JavaScript~ ')).toBe(
+    'Hello-World-~JavaScript~'
+  )
+  expect(slugify('🌟🌟🌟')).toBe('')
+  expect(slugify('🚀 Launch the 🚀 rocket!')).toBe('Launch-the-rocket')
 })
