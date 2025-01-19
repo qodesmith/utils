@@ -2,6 +2,7 @@ import {expect, test} from 'bun:test'
 import {
   bytesToSize,
   getRandomNumber,
+  getUnitInMs,
   sanitizeDecimal,
   secondsToDuration,
 } from './numbers'
@@ -54,4 +55,20 @@ test('secondsToDuration', () => {
   expect(secondsToDuration(24 * 60 * 60)).toBe('24:00:00')
   expect(secondsToDuration(24 * 60 * 60 + 1)).toBe('24:00:01')
   expect(secondsToDuration(24 * 60 * 60 * 2 + 1)).toBe('48:00:01')
+})
+
+test('getUnitInMs', () => {
+  expect(getUnitInMs(1, 's')).toBe(1000)
+  expect(getUnitInMs(1, 'm')).toBe(60000)
+  expect(getUnitInMs(1, 'h')).toBe(3600000)
+  expect(getUnitInMs(1, 'd')).toBe(86400000)
+  expect(getUnitInMs(1, 'w')).toBe(604800000)
+  expect(getUnitInMs(1, 'y')).toBe(31449600000)
+  // Tests for non-whole numbers
+  expect(getUnitInMs(1.5, 's')).toBe(1500)
+  expect(getUnitInMs(0.5, 'm')).toBe(30000)
+  expect(getUnitInMs(2.5, 'h')).toBe(9000000)
+  expect(getUnitInMs(0.25, 'd')).toBe(21600000)
+  expect(getUnitInMs(1.5, 'w')).toBe(907200000)
+  expect(getUnitInMs(0.1, 'y')).toBe(3144960000)
 })

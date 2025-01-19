@@ -111,3 +111,45 @@ export function secondsToDuration(totalSeconds: number): string {
   // If no hours, just return minutes and seconds
   return `${minutes}:${formattedSeconds}`
 }
+
+/**
+ * Converts a given quantity of time into milliseconds based on the specified
+ * unit.
+ *
+ * @param {number} quantity - The amount of time to convert.
+ * @param {'s' | 'm' | 'h' | 'd' | 'w' | 'y'} unit - The unit of time to convert from.
+ *   - `s` for seconds
+ *   - `m` for minutes
+ *   - `h` for hours
+ *   - `d` for days
+ *   - `w` for weeks
+ *   - `y` for years
+ * @returns {number} The equivalent time in milliseconds.
+ *
+ * @example
+ * getUnitInMs(1, 's') // 1000
+ * getUnitInMs(1, 'm') // 60000
+ * getUnitInMs(1, 'h') // 3600000
+ * getUnitInMs(1, 'd') // 86400000
+ * getUnitInMs(1, 'w') // 604800000
+ * getUnitInMs(1, 'y') // 31536000000
+ */
+export function getUnitInMs(
+  quantity: number,
+  unit: 's' | 'm' | 'h' | 'd' | 'w' | 'y'
+) {
+  switch (unit) {
+    case 's':
+      return 1000 * quantity
+    case 'm':
+      return 1000 * 60 * quantity
+    case 'h':
+      return 1000 * 60 * 60 * quantity
+    case 'd':
+      return 1000 * 60 * 60 * 24 * quantity
+    case 'w':
+      return 1000 * 60 * 60 * 24 * 7 * quantity
+    case 'y':
+      return 1000 * 60 * 60 * 24 * 7 * 52 * quantity
+  }
+}
