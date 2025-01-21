@@ -9,7 +9,14 @@
 export function errorToObject(error: any): Record<string, unknown> {
   return Object.getOwnPropertyNames(error).reduce<Record<string, unknown>>(
     (acc, key) => {
-      acc[key] = error[key]
+      // The `cause` property may be an error object as well.
+      if (error[key] instanceof Error) {
+        const errorObj = errorToObject(error[key])
+        acc[key] = errorObj
+      } else {
+        acc[key] = error[key]
+      }
+
       return acc
     },
     {}
