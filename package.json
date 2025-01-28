@@ -13,7 +13,7 @@
   "scripts": {
     "test": "bun test",
     "build": "bun run build.ts",
-    "publishPackage": "bun run test && bun run build && npm publish"
+    "publishPackage": "bun run test && bun run build && bun publish"
   },
   "publishConfig": {
     "access": "public"
