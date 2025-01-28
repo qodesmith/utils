@@ -1,3 +1,5 @@
+import {isPlainObject} from './objects'
+
 /**
  * Converts an Error object into a plain JavaScript object.
  * This function is useful for serializing Error objects, which may contain
@@ -12,8 +14,11 @@ export function errorToObject(
 ): Record<string, unknown> {
   return Object.getOwnPropertyNames(error).reduce<Record<string, unknown>>(
     (acc, key) => {
-      // The `cause` property may be an error object as well.
-      if (error[key] instanceof Error) {
+      /**
+       * The `cause` property may be an error object as well.
+       * Look for errors deeply nested within the object.
+       */
+      if (error[key] instanceof Error || isPlainObject(error[key])) {
         const errorObj = errorToObject(error[key], options)
         acc[key] = errorObj
       } else if (

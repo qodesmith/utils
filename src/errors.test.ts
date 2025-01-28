@@ -43,7 +43,7 @@ describe('errorToObject', () => {
     })
   })
 
-  test.only('prettyStack', () => {
+  test('prettyStack', () => {
     const expectedPropertiesPrettyStack = expectedProperties
       .filter(property => property !== 'stack')
       .concat(['stack_0', 'stack_1'])
@@ -55,5 +55,23 @@ describe('errorToObject', () => {
     })
     expect(plainErrorObj.stack_0).toBe('Error: Nope!')
     expect(plainErrorObj.stack_1).toBeString()
+  })
+
+  test('deep nesting', () => {
+    const regularObject = {a: 1, b: 2}
+    const processedRegularObject = errorToObject(regularObject)
+    expect(processedRegularObject).toEqual(regularObject)
+
+    const deepObject = {obj: {deeply: {nested: true}}}
+    const processedDeepObject = errorToObject(deepObject)
+    expect(processedDeepObject).toEqual(deepObject)
+
+    const objWithDeepError = {obj: {with: {deep: new Error('Deep!')}}}
+    const processedDeepError = errorToObject(objWithDeepError)
+    expectedProperties.forEach(prop => {
+      expect(processedDeepError).toHaveProperty(['obj', 'with', 'deep', prop])
+    })
+    // @ts-expect-error this is fine.
+    expect(processedDeepError.obj.with.deep instanceof Error).toBeFalse()
   })
 })
