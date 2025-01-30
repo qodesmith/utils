@@ -74,4 +74,24 @@ describe('errorToObject', () => {
     // @ts-expect-error this is fine.
     expect(processedDeepError.obj.with.deep instanceof Error).toBeFalse()
   })
+
+  test('naughty values', () => {
+    expect(errorToObject(null)).toEqual({})
+    expect(errorToObject(undefined)).toEqual({})
+    expect(errorToObject(0)).toEqual({})
+    expect(errorToObject(5)).toEqual({})
+    expect(errorToObject([])).toEqual({length: 0})
+    expect(errorToObject(new Set([1, 2, 3, 4]))).toEqual({})
+    expect(
+      errorToObject(
+        new Map([
+          [1, 'one'],
+          [2, 'two'],
+        ])
+      )
+    ).toEqual({})
+    expect(errorToObject(true)).toEqual({})
+    expect(errorToObject(false)).toEqual({})
+    expect(() => errorToObject(class {})).not.toThrow()
+  })
 })
