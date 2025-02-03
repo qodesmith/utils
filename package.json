@@ -1,6 +1,6 @@
 {
   "name": "@qodestack/utils",
-  "version": "2.17.0",
+  "version": "2.18.0",
   "description": "Useful utility functions",
   "module": "index.ts",
   "main": "./dist/index.js",
@@ -12,7 +12,7 @@
   "prettier": "@qodestack/prettier-config",
   "scripts": {
     "test": "bun test",
-    "build": "bun run build.ts",
+    "build": "bun run test && bun run build.ts",
     "publishPackage": "bun run test && bun run build && bun publish"
   },
   "publishConfig": {
