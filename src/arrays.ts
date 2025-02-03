@@ -1,3 +1,5 @@
+import {getRandomNumber} from './numbers'
+
 /**
  * Chunks an array into smaller arrays of a specified size.
  * Works with regular arrays and TypedArrays.
@@ -53,4 +55,15 @@ export function shuffleArray<T>(array: T[]): T[] {
   }
 
   return shuffledArray
+}
+
+/**
+ * Returns a random item from the given array.
+ *
+ * @param {T[]} array - The array from which to select a random item.
+ * @returns {T} A random item from the array.
+ */
+export function getRandomArrayItem<T>(array: T[]): T {
+  const randomIndex = getRandomNumber(0, array.length - 1)
+  return array[randomIndex]
 }

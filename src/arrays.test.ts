@@ -1,5 +1,5 @@
 import {expect, test} from 'bun:test'
-import {chunkArray, shuffleArray} from './arrays'
+import {chunkArray, getRandomArrayItem, shuffleArray} from './arrays'
 
 test('chunkArray', () => {
   const arr = [1, 2, 3, 4, 5, 6, 7]
@@ -30,4 +30,26 @@ test('shuffleArray', () => {
   expect(originalArrIsShuffled).toBeFalse()
   expect(isShuffled).toBeTrue()
   expect(arr).not.toBe(shuffledArr)
+})
+
+test('getRandomArrayItem', () => {
+  const array = [1, 2]
+  let returned1 = false
+  let returned2 = false
+
+  // Run 10 times to ensure both values have ample chance to be chosen.
+  for (let i = 0; i < 10; i++) {
+    const num = getRandomArrayItem(array)
+
+    if (num === 1) {
+      returned1 = true
+    }
+
+    if (num === 2) {
+      returned2 = true
+    }
+  }
+
+  expect(returned1).toBeTrue()
+  expect(returned2).toBeTrue()
 })
