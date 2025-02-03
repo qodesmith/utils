@@ -1,3 +1,5 @@
+import {getRandomArrayItem} from './arrays'
+
 /**
  * Pluralizes a word based on the given amount.
  *
@@ -47,4 +49,27 @@ export function slugify(text: string): string {
       // Replace consecutive hyphens with a single hyphen
       .replace(/-+/g, '-')
   )
+}
+
+/**
+ * Generates a random pronounceable word by alternating between consonants and
+ * vowels, starting with a consonant.
+ *
+ * @param {number} length - The length of the word to generate.
+ * @returns {string} A randomly generated pronounceable word.
+ */
+export function getRandomPronounceableWord(lenth: number = 5) {
+  const consonants = 'bcdfghjklmnpqrstvwxyz'.split('')
+  const vowels = 'aeiou'.split('')
+  let word = ''
+
+  for (let i = 0; i < lenth; i++) {
+    const isOdd = i % 2
+    const array = isOdd ? vowels : consonants
+    const randomLetter = getRandomArrayItem(array)
+
+    word += randomLetter
+  }
+
+  return word
 }
