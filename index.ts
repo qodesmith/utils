@@ -1,4 +1,5 @@
 export * from './src/arrays'
+export * from './src/async'
 export * from './src/dates'
 export * from './src/debounce'
 export * from './src/errors'
