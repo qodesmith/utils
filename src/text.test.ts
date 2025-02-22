@@ -2,15 +2,21 @@ import {describe, expect, test} from 'bun:test'
 import {pluralize, getRandomPronounceableWord, slugify} from './text'
 import {getRandomNumber} from './numbers'
 
-test('pluralize', () => {
-  const results = [
-    pluralize(3, 'apple'), // '3 apples'
-    pluralize('0', 'apple'), // '0 apples'
-    pluralize(1, 'apple'), // '1 apple'
-    pluralize('1', 'apple'), // '1 apple'
-  ]
+describe('pluralize', () => {
+  test('parses a number', () => {
+    expect(pluralize(3, 'apple')).toBe('3 apples')
+    expect(pluralize(1, 'apple')).toBe('1 apple')
+  })
 
-  expect(results).toEqual(['3 apples', '0 apples', '1 apple', '1 apple'])
+  test('parses a string', () => {
+    expect(pluralize('3', 'apple')).toBe('3 apples')
+    expect(pluralize('1', 'apple')).toBe('1 apple')
+  })
+
+  test('excludes the number', () => {
+    expect(pluralize(3, 'apple', false)).toBe('apples')
+    expect(pluralize('1', 'apple', false)).toBe('apple')
+  })
 })
 
 test('slugify', () => {

@@ -12,9 +12,13 @@ import {getRandomArrayItem} from './arrays'
  * pluralize('0', 'apple') // '0 apples'
  * pluralize(1, 'apple') // '1 apple'
  */
-export function pluralize(amount: number | string, word: string): string {
+export function pluralize(
+  amount: number | string,
+  word: string,
+  includeNumber = true
+): string {
   const s = +amount === 1 ? '' : 's'
-  return `${amount} ${word}${s}`
+  return includeNumber ? `${amount} ${word}${s}` : `${word}${s}`
 }
 
 /**
