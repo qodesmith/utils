@@ -19,8 +19,12 @@ const contents = fs
     return acc
   }, [])
   .sort()
+const headerComments = [
+  '// biome-ignore-all lint/performance/noBarrelFile: needed for this package',
+  '// biome-ignore-all lint/performance/noReExportAll: needed for this package',
+].join('\n')
 
-await Bun.write('./index.ts', `${contents.join('\n')}\n`)
+await Bun.write('./index.ts', `${headerComments}\n${contents.join('\n')}\n`)
 
 await Bun.build({
   entrypoints: ['./index.ts'],
@@ -29,6 +33,7 @@ await Bun.build({
   // naming: '[name]-[hash].[ext]',
   target: 'bun',
   plugins: [dts()],
+  sourcemap: 'linked'
 })
 
 const totalTime = ((performance.now() - start) / 1000).toFixed(2)

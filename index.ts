@@ -1,3 +1,5 @@
+// biome-ignore-all lint/performance/noBarrelFile: needed for this package
+// biome-ignore-all lint/performance/noReExportAll: needed for this package
 export * from './src/arrays'
 export * from './src/async'
 export * from './src/dates'
