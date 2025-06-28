@@ -1,6 +1,7 @@
 import {describe, expect, test} from 'bun:test'
-import {pluralize, getRandomPronounceableWord, slugify} from './text'
+
 import {getRandomNumber} from './numbers'
+import {getRandomPronounceableWord, pluralize, slugify} from './text'
 
 describe('pluralize', () => {
   test('parses a number', () => {
@@ -43,7 +44,7 @@ describe('getRandomPronounceableWord', () => {
   test('should return 5 characters when no input given, starting & ending with a consonant', () => {
     expect(getRandomPronounceableWord()).toHaveLength(5)
     expect(consonants).toInclude(getRandomPronounceableWord()[0])
-    expect(consonants).toInclude(getRandomPronounceableWord().at(-1)!)
+    expect(consonants).toInclude(getRandomPronounceableWord().at(-1) as string)
   })
 
   test('should alternate between consonants & vowels, starting with consonants', () => {

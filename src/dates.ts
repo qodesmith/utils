@@ -39,5 +39,5 @@ export function isValidDate(date: unknown): boolean {
     return false
   }
 
-  return !isNaN(date.getTime())
+  return !Number.isNaN(date.getTime())
 }

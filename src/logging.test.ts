@@ -1,20 +1,22 @@
 import {
-  expect,
-  test,
   beforeAll,
   beforeEach,
+  expect,
   setSystemTime,
   spyOn,
+  test,
 } from 'bun:test'
-import {createLogger, emptyLog} from './logging'
+import process from 'node:process'
+
 import {ansiColors} from './internal/ansiColors'
+import {createLogger, emptyLog} from './logging'
 
 const spy = spyOn(console, 'log')
 const timeZone = 'America/New_York'
 process.env.TZ = timeZone
 
 beforeAll(() => {
-  setSystemTime(new Date(1718468598753))
+  setSystemTime(new Date(1_718_468_598_753))
 })
 
 beforeEach(() => {

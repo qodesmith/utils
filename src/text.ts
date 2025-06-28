@@ -62,7 +62,7 @@ export function slugify(text: string): string {
  * @param {number} length - The length of the word to generate.
  * @returns {string} A randomly generated pronounceable word.
  */
-export function getRandomPronounceableWord(lenth: number = 5) {
+export function getRandomPronounceableWord(lenth = 5) {
   const consonants = 'bcdfghjklmnpqrstvwxyz'.split('')
   const vowels = 'aeiou'.split('')
   let word = ''

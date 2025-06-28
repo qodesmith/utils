@@ -1,4 +1,5 @@
 import {expect, test} from 'bun:test'
+
 import {chunkArray, getRandomArrayItem, shuffleArray} from './arrays'
 
 test('chunkArray', () => {

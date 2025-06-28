@@ -9,6 +9,7 @@ import {isPlainObject} from './objects'
  * @returns {Record<string, unknown>} A plain object representation of the Error.
  */
 export function errorToObject(
+  // biome-ignore lint/suspicious/noExplicitAny: this is ok here
   error: any,
   options?: {prettyStack: boolean}
 ): Record<string, unknown> {

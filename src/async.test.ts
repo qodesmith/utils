@@ -1,9 +1,10 @@
 import {expect, test} from 'bun:test'
+
 import {catchy} from './async'
 
 test('catchy', async () => {
   const promise1 = Promise.resolve(1)
-  const promise2 = Promise.reject(new Error())
+  const promise2 = Promise.reject(new Error('error'))
   const promise3 = Promise.reject('nope')
   const [promise1Val, promise1Error] = await catchy(promise1)
   const [promise2Val, promise2Error] = await catchy(promise2)

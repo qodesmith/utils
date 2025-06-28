@@ -1,3 +1,6 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: this is ok here */
+/** biome-ignore-all lint/suspicious/noConsole: this is needed for a logger! */
+
 import {getLocalDate} from './dates'
 import {ansiColors} from './internal/ansiColors'
 
@@ -76,8 +79,8 @@ export function createLogger({timeZone}: {timeZone?: string} = {}) {
  * ```
  */
 export const emptyLog = {
-  text(...items: any[]) {},
-  success(...items: any[]) {},
-  error(...items: any[]) {},
-  warning(...items: any[]) {},
+  text(..._items: any[]) {},
+  success(..._items: any[]) {},
+  error(..._items: any[]) {},
+  warning(..._items: any[]) {},
 }

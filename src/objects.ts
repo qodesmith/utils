@@ -1,3 +1,4 @@
+// biome-ignore lint/suspicious/noExplicitAny: it's ok here
 export function isPlainObject(value: any): value is Record<string, unknown> {
   // Check if the value is an object and not null
   if (typeof value !== 'object' || value === null) {

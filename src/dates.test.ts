@@ -1,4 +1,5 @@
-import {describe, it, expect} from 'bun:test'
+import {describe, expect, it} from 'bun:test'
+
 import {isValidDate} from './dates'
 
 describe('isValidDate', () => {
@@ -14,7 +15,7 @@ describe('isValidDate', () => {
 
   it('should return false for a non-Date object', () => {
     expect(isValidDate('2024-10-05')).toBe(false)
-    expect(isValidDate(1234567890)).toBe(false)
+    expect(isValidDate(1_234_567_890)).toBe(false)
     expect(isValidDate({})).toBe(false)
     expect(isValidDate(null)).toBe(false)
     expect(isValidDate(undefined)).toBe(false)

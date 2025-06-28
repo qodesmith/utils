@@ -51,19 +51,27 @@ export function sanitizeDecimal(num: number): string {
  * bytesToSize(0);       // "0 bytes"
  */
 export function bytesToSize(bytes: number): string {
-  if (bytes >= 1073741824) {
-    return sanitizeDecimal(bytes / 1073741824) + ' GB'
-  } else if (bytes >= 1048576) {
-    return sanitizeDecimal(bytes / 1048576) + ' MB'
-  } else if (bytes >= 1024) {
-    return sanitizeDecimal(bytes / 1024) + ' KB'
-  } else if (bytes > 1) {
-    return bytes + ' bytes'
-  } else if (bytes == 1) {
-    return bytes + ' byte'
-  } else {
-    return '0 bytes'
+  if (bytes >= 1_073_741_824) {
+    return `${sanitizeDecimal(bytes / 1_073_741_824)} GB`
   }
+
+  if (bytes >= 1_048_576) {
+    return `${sanitizeDecimal(bytes / 1_048_576)} MB`
+  }
+
+  if (bytes >= 1024) {
+    return `${sanitizeDecimal(bytes / 1024)} KB`
+  }
+
+  if (bytes > 1) {
+    return `${bytes} bytes`
+  }
+
+  if (bytes === 1) {
+    return `${bytes} byte`
+  }
+
+  return '0 bytes'
 }
 
 /**
@@ -151,5 +159,7 @@ export function getUnitInMs(
       return 1000 * 60 * 60 * 24 * 7 * quantity
     case 'y':
       return 1000 * 60 * 60 * 24 * 7 * 52 * quantity
+    default:
+      throw new Error(`Unexpected unit: ${unit}`)
   }
 }

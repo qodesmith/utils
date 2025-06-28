@@ -1,4 +1,5 @@
 import {expect, test} from 'bun:test'
+
 import {isPlainObject} from './objects'
 
 test('isPlainObject', () => {

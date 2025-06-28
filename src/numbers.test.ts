@@ -1,4 +1,5 @@
 import {expect, test} from 'bun:test'
+
 import {
   bytesToSize,
   getRandomNumber,
@@ -17,7 +18,7 @@ test('sanitizeDecimal', () => {
 })
 
 test('bytesToSize', () => {
-  expect(bytesToSize(38974928734)).toBe('36.3 GB')
+  expect(bytesToSize(38_974_928_734)).toBe('36.3 GB')
   expect(bytesToSize(1000)).toBe('1000 bytes')
   expect(bytesToSize(1024)).toBe('1 KB')
   expect(bytesToSize(1024 * 1000)).toBe('1000 KB')
@@ -59,16 +60,16 @@ test('secondsToDuration', () => {
 
 test('getUnitInMs', () => {
   expect(getUnitInMs(1, 's')).toBe(1000)
-  expect(getUnitInMs(1, 'm')).toBe(60000)
-  expect(getUnitInMs(1, 'h')).toBe(3600000)
-  expect(getUnitInMs(1, 'd')).toBe(86400000)
-  expect(getUnitInMs(1, 'w')).toBe(604800000)
-  expect(getUnitInMs(1, 'y')).toBe(31449600000)
+  expect(getUnitInMs(1, 'm')).toBe(60_000)
+  expect(getUnitInMs(1, 'h')).toBe(3_600_000)
+  expect(getUnitInMs(1, 'd')).toBe(86_400_000)
+  expect(getUnitInMs(1, 'w')).toBe(604_800_000)
+  expect(getUnitInMs(1, 'y')).toBe(31_449_600_000)
   // Tests for non-whole numbers
   expect(getUnitInMs(1.5, 's')).toBe(1500)
-  expect(getUnitInMs(0.5, 'm')).toBe(30000)
-  expect(getUnitInMs(2.5, 'h')).toBe(9000000)
-  expect(getUnitInMs(0.25, 'd')).toBe(21600000)
-  expect(getUnitInMs(1.5, 'w')).toBe(907200000)
-  expect(getUnitInMs(0.1, 'y')).toBe(3144960000)
+  expect(getUnitInMs(0.5, 'm')).toBe(30_000)
+  expect(getUnitInMs(2.5, 'h')).toBe(9_000_000)
+  expect(getUnitInMs(0.25, 'd')).toBe(21_600_000)
+  expect(getUnitInMs(1.5, 'w')).toBe(907_200_000)
+  expect(getUnitInMs(0.1, 'y')).toBe(3_144_960_000)
 })
