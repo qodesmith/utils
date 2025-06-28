@@ -1,6 +1,6 @@
 {
   "name": "@qodestack/utils",
-  "version": "2.20.0",
+  "version": "2.21.0",
   "description": "Useful utility functions",
   "module": "index.ts",
   "main": "./dist/index.js",
@@ -21,7 +21,9 @@
     "format": "biome format",
     "format:fix": "biome format --write ."
   },
-  "publishConfig": {"access": "public"},
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qodesmith/utils.git"
@@ -31,5 +33,7 @@
     "@types/bun": "latest",
     "bun-plugin-dts": "^0.3.0"
   },
-  "peerDependencies": {"typescript": "^5.4.5"}
+  "peerDependencies": {
+    "typescript": "^5.4.5"
+  }
 }
