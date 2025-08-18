@@ -3,12 +3,6 @@
   "extends": ["@qodestack/biome-config/react"],
   "files": {
     "ignoreUnknown": true,
-    "includes": [
-      "**",
-      "!**/node_modules/**",
-      "!dist/**",
-      "!*.lock",
-      "!build.ts"
-    ]
+    "includes": ["**", "!**/node_modules", "!dist", "!*.lock", "!build.ts"]
   }
 }
