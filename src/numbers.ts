@@ -132,6 +132,7 @@ export function secondsToDuration(totalSeconds: number): string {
  *   - `d` for days
  *   - `w` for weeks
  *   - `y` for years
+ * @param {boolean} isLeapYear - Whether to calculate year as leap year (366 days) or regular year (365 days). Only affects 'y' unit.
  * @returns {number} The equivalent time in milliseconds.
  *
  * @example
@@ -140,11 +141,13 @@ export function secondsToDuration(totalSeconds: number): string {
  * getUnitInMs(1, 'h') // 3600000
  * getUnitInMs(1, 'd') // 86400000
  * getUnitInMs(1, 'w') // 604800000
- * getUnitInMs(1, 'y') // 31536000000
+ * getUnitInMs(1, 'y') // 31536000000 (365 days)
+ * getUnitInMs(1, 'y', true) // 31622400000 (366 days)
  */
 export function getUnitInMs(
   quantity: number,
-  unit: 's' | 'm' | 'h' | 'd' | 'w' | 'y'
+  unit: 's' | 'm' | 'h' | 'd' | 'w' | 'y',
+  isLeapYear?: boolean
 ) {
   switch (unit) {
     case 's':
@@ -158,7 +161,53 @@ export function getUnitInMs(
     case 'w':
       return 1000 * 60 * 60 * 24 * 7 * quantity
     case 'y':
-      return 1000 * 60 * 60 * 24 * 7 * 52 * quantity
+      return 1000 * 60 * 60 * 24 * (isLeapYear ? 366 : 365) * quantity
+    default:
+      throw new Error(`Unexpected unit: ${unit}`)
+  }
+}
+
+/**
+ * Converts a given quantity of time into seconds based on the specified unit.
+ *
+ * @param {number} quantity - The amount of time to convert.
+ * @param {'ms' | 'm' | 'h' | 'd' | 'w' | 'y'} unit - The unit of time to convert from.
+ *   - `ms` for milliseconds
+ *   - `m` for minutes
+ *   - `h` for hours
+ *   - `d` for days
+ *   - `w` for weeks
+ *   - `y` for years
+ * @param {boolean} isLeapYear - Whether to calculate year as leap year (366 days) or regular year (365 days). Only affects 'y' unit.
+ * @returns {number} The equivalent time in seconds.
+ *
+ * @example
+ * getUnitInSeconds(1000, 'ms') // 1
+ * getUnitInSeconds(1, 'm') // 60
+ * getUnitInSeconds(1, 'h') // 3600
+ * getUnitInSeconds(1, 'd') // 86400
+ * getUnitInSeconds(1, 'w') // 604800
+ * getUnitInSeconds(1, 'y') // 31536000 (365 days)
+ * getUnitInSeconds(1, 'y', true) // 31622400 (366 days)
+ */
+export function getUnitInSeconds(
+  quantity: number,
+  unit: 'ms' | 'm' | 'h' | 'd' | 'w' | 'y',
+  isLeapYear?: boolean
+) {
+  switch (unit) {
+    case 'ms':
+      return quantity / 1000
+    case 'm':
+      return 60 * quantity
+    case 'h':
+      return 60 * 60 * quantity
+    case 'd':
+      return 60 * 60 * 24 * quantity
+    case 'w':
+      return 60 * 60 * 24 * 7 * quantity
+    case 'y':
+      return 60 * 60 * 24 * (isLeapYear ? 366 : 365) * quantity
     default:
       throw new Error(`Unexpected unit: ${unit}`)
   }
