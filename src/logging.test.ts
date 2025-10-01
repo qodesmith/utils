@@ -72,21 +72,9 @@ test('log with includeTime: false', () => {
 
   expect(spy).toHaveBeenCalledTimes(3)
 
-  expect(spy).toHaveBeenCalledWith(
-    ansiColors.warning,
-    ansiColors.warning,
-    'test warning'
-  )
-  expect(spy).toHaveBeenCalledWith(
-    ansiColors.error,
-    ansiColors.error,
-    'test error'
-  )
-  expect(spy).toHaveBeenCalledWith(
-    ansiColors.success,
-    ansiColors.success,
-    'test success'
-  )
+  expect(spy).toHaveBeenCalledWith(ansiColors.warning, 'test warning')
+  expect(spy).toHaveBeenCalledWith(ansiColors.error, 'test error')
+  expect(spy).toHaveBeenCalledWith(ansiColors.success, 'test success')
 })
 
 test('log with includeTime: true (explicit)', () => {

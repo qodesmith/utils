@@ -11,10 +11,10 @@ function logger(
   messages: any[]
 ) {
   const ansiStr = ansiColors[type]
-  const initialItems = [ansiStr]
+  const initialItems = []
 
   if (includeTime) {
-    initialItems.push(`[${getLocalDate(timeZone)}]`)
+    initialItems.push(ansiStr, `[${getLocalDate(timeZone)}]`)
   }
 
   const items = initialItems.concat(
@@ -59,7 +59,11 @@ export function createLogger({
 } = {}) {
   const log = {
     text(...items: any[]) {
-      console.log(`[${getLocalDate(timeZone)}]`, ...items)
+      if (includeTime) {
+        items.unshift(`[${getLocalDate(timeZone)}]`)
+      }
+
+      console.log(...items)
     },
     success(...items: any[]) {
       logger('success', timeZone, includeTime, items)
