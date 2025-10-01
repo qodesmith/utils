@@ -7,10 +7,17 @@ import {ansiColors} from './internal/ansiColors'
 function logger(
   type: keyof typeof ansiColors,
   timeZone: string | undefined,
+  includeTime: boolean,
   messages: any[]
 ) {
   const ansiStr = ansiColors[type]
-  const items = [ansiStr, `[${getLocalDate(timeZone)}]`].concat(
+  const initialItems = [ansiStr]
+
+  if (includeTime) {
+    initialItems.push(`[${getLocalDate(timeZone)}]`)
+  }
+
+  const items = initialItems.concat(
     messages.flatMap(item => {
       const isObj = typeof item === 'object' || typeof item === 'function'
       return isObj ? [item] : [ansiStr, item]
@@ -43,19 +50,25 @@ function logger(
  * @example
  * log.text('Hello!') // `[6/13/2024, 9:45:57 AM] Hello!`
  */
-export function createLogger({timeZone}: {timeZone?: string} = {}) {
+export function createLogger({
+  timeZone,
+  includeTime = true,
+}: {
+  timeZone?: string
+  includeTime?: boolean
+} = {}) {
   const log = {
     text(...items: any[]) {
       console.log(`[${getLocalDate(timeZone)}]`, ...items)
     },
     success(...items: any[]) {
-      logger('success', timeZone, items)
+      logger('success', timeZone, includeTime, items)
     },
     error(...items: any[]) {
-      logger('error', timeZone, items)
+      logger('error', timeZone, includeTime, items)
     },
     warning(...items: any[]) {
-      logger('warning', timeZone, items)
+      logger('warning', timeZone, includeTime, items)
     },
   }
 

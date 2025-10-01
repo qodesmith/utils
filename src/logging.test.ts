@@ -32,7 +32,7 @@ test('emptyLog', () => {
   expect(spy).not.toHaveBeenCalled()
 })
 
-test('log', () => {
+test('log with includeTime default (true)', () => {
   const log = createLogger({timeZone: 'Australia/Sydney'})
 
   log.text('test')
@@ -60,5 +60,60 @@ test('log', () => {
     '[6/16/2024, 2:23:18 AM]',
     ansiColors.success,
     'test 4'
+  )
+})
+
+test('log with includeTime: false', () => {
+  const log = createLogger({timeZone: 'Australia/Sydney', includeTime: false})
+
+  log.warning('test warning')
+  log.error('test error')
+  log.success('test success')
+
+  expect(spy).toHaveBeenCalledTimes(3)
+
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.warning,
+    ansiColors.warning,
+    'test warning'
+  )
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.error,
+    ansiColors.error,
+    'test error'
+  )
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.success,
+    ansiColors.success,
+    'test success'
+  )
+})
+
+test('log with includeTime: true (explicit)', () => {
+  const log = createLogger({timeZone: 'Australia/Sydney', includeTime: true})
+
+  log.warning('test')
+  log.error('test 2')
+  log.success('test 3')
+
+  expect(spy).toHaveBeenCalledTimes(3)
+
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.warning,
+    '[6/16/2024, 2:23:18 AM]',
+    ansiColors.warning,
+    'test'
+  )
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.error,
+    '[6/16/2024, 2:23:18 AM]',
+    ansiColors.error,
+    'test 2'
+  )
+  expect(spy).toHaveBeenCalledWith(
+    ansiColors.success,
+    '[6/16/2024, 2:23:18 AM]',
+    ansiColors.success,
+    'test 3'
   )
 })
