@@ -34,14 +34,14 @@ export function chunkArray<T>(arr: ArrayLike<T>, size: number): T[][] {
 /**
  * Shuffles the elements of an array randomly.
  *
- * @param {T[]} array - The array to be shuffled.
+ * @param {T[] | readonly T[]} array - The array to be shuffled.
  * @returns {T[]} A new array with the same elements in a random order.
  *
  * @example
  * const arr = [1, 2, 3, 4, 5];
  * const shuffledArr = shuffleArray(arr); // [3, 1, 5, 2, 4] (random order)
  */
-export function shuffleArray<T>(array: T[]): T[] {
+export function shuffleArray<T>(array: T[] | readonly T[]): T[] {
   // Create a copy of the original array to avoid modifying it directly
   const shuffledArray = [...array]
 
@@ -60,10 +60,10 @@ export function shuffleArray<T>(array: T[]): T[] {
 /**
  * Returns a random item from the given array.
  *
- * @param {T[]} array - The array from which to select a random item.
+ * @param {T[] | readonly T[]} array - The array from which to select a random item.
  * @returns {T} A random item from the array.
  */
-export function getRandomArrayItem<T>(array: T[]): T {
+export function getRandomArrayItem<T>(array: T[] | readonly T[]): T {
   const randomIndex = getRandomNumber(0, array.length - 1)
   return array[randomIndex]
 }
