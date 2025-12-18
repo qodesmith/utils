@@ -13,6 +13,10 @@ export function errorToObject(
   error: any,
   options?: {prettyStack: boolean}
 ): Record<string, unknown> {
+  if (typeof error === 'string') {
+    return {message: error}
+  }
+
   return Object.getOwnPropertyNames(error ?? {}).reduce<
     Record<string, unknown>
   >((acc, key) => {

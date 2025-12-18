@@ -93,6 +93,13 @@ describe('errorToObject', () => {
     ).toEqual({})
     expect(errorToObject(true)).toEqual({})
     expect(errorToObject(false)).toEqual({})
+    expect(errorToObject(Symbol('test'))).toEqual({})
+    expect(errorToObject(BigInt(123))).toEqual({})
     expect(() => errorToObject(class {})).not.toThrow()
+  })
+
+  test('string values', () => {
+    expect(errorToObject('simple string')).toEqual({message: 'simple string'})
+    expect(errorToObject('')).toEqual({message: ''})
   })
 })
