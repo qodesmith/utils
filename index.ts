@@ -2,6 +2,7 @@
 // biome-ignore-all lint/performance/noReExportAll: needed for this package
 export * from './src/arrays'
 export * from './src/async'
+export * from './src/colors'
 export * from './src/dates'
 export * from './src/debounce'
 export * from './src/errors'
