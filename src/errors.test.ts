@@ -1,6 +1,6 @@
-import {describe, expect, test} from 'bun:test'
+import {beforeEach, describe, expect, spyOn, test} from 'bun:test'
 
-import {errorToObject} from './errors'
+import {bestEffort, errorToObject} from './errors'
 
 describe('errorToObject', () => {
   const expectedProperties = [
@@ -101,5 +101,201 @@ describe('errorToObject', () => {
   test('string values', () => {
     expect(errorToObject('simple string')).toEqual({message: 'simple string'})
     expect(errorToObject('')).toEqual({message: ''})
+  })
+})
+
+describe('bestEffort', () => {
+  const spy = spyOn(console, 'log')
+
+  beforeEach(() => {
+    spy.mockReset()
+  })
+
+  test('returns the value from a successful sync callback', () => {
+    const result = bestEffort(() => 42)
+    expect(result).toBe(42)
+    expect(spy).not.toHaveBeenCalled()
+  })
+
+  test('returns undefined and logs when a sync callback throws and log: true', () => {
+    const result = bestEffort(
+      () => {
+        throw new Error('sync boom')
+      },
+      {log: true}
+    )
+    expect(result).toBeUndefined()
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    const logArgs = spy.mock.calls[0]
+    expect(logArgs).toContain('[BEST EFFORT]')
+    const errorObj = logArgs?.find(
+      arg => typeof arg === 'object' && arg !== null && 'message' in arg
+    ) as Record<string, unknown> | undefined
+    expect(errorObj?.message).toBe('sync boom')
+  })
+
+  test('does not log by default when a sync callback throws', () => {
+    const result = bestEffort(() => {
+      throw new Error('sync boom')
+    })
+    expect(result).toBeUndefined()
+    expect(spy).not.toHaveBeenCalled()
+  })
+
+  test('returns the resolved value from a successful async callback', async () => {
+    const result = await bestEffort(async () => 'hello')
+    expect(result).toBe('hello')
+    expect(spy).not.toHaveBeenCalled()
+  })
+
+  test('returns undefined and logs when an async callback rejects and log: true', async () => {
+    const result = await bestEffort(
+      async () => {
+        throw new Error('async boom')
+      },
+      {log: true}
+    )
+    expect(result).toBeUndefined()
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    const logArgs = spy.mock.calls[0]
+    expect(logArgs).toContain('[BEST EFFORT (promise)]')
+    const errorObj = logArgs?.find(
+      arg => typeof arg === 'object' && arg !== null && 'message' in arg
+    ) as Record<string, unknown> | undefined
+    expect(errorObj?.message).toBe('async boom')
+  })
+
+  test('does not log by default when an async callback rejects', async () => {
+    const result = await bestEffort(async () => {
+      throw new Error('async boom')
+    })
+    expect(result).toBeUndefined()
+    expect(spy).not.toHaveBeenCalled()
+  })
+
+  test('returns undefined and logs when a callback returns a rejecting promise and log: true', async () => {
+    const result = await bestEffort(
+      () => Promise.reject(new Error('rejected')),
+      {log: true}
+    )
+    expect(result).toBeUndefined()
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    const logArgs = spy.mock.calls[0]
+    expect(logArgs).toContain('[BEST EFFORT (promise)]')
+  })
+
+  test('handles non-Error thrown values', () => {
+    const result = bestEffort(
+      () => {
+        throw 'string error'
+      },
+      {log: true}
+    )
+    expect(result).toBeUndefined()
+    expect(spy).toHaveBeenCalledTimes(1)
+  })
+
+  test('does not log when the sync callback returns undefined', () => {
+    const result = bestEffort(() => undefined)
+    expect(result).toBeUndefined()
+    expect(spy).not.toHaveBeenCalled()
+  })
+
+  test('calls onError alongside logging when a sync callback throws', () => {
+    let captured: unknown
+    const onError = (err: unknown) => {
+      captured = err
+    }
+
+    const err = new Error('sync boom')
+    const result = bestEffort(
+      () => {
+        throw err
+      },
+      {log: true, onError}
+    )
+
+    expect(result).toBeUndefined()
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(captured).toBe(err)
+  })
+
+  test('calls onError alongside logging when an async callback rejects', async () => {
+    let captured: unknown
+    const onError = (err: unknown) => {
+      captured = err
+    }
+
+    const err = new Error('async boom')
+    const result = await bestEffort(
+      async () => {
+        throw err
+      },
+      {log: true, onError}
+    )
+
+    expect(result).toBeUndefined()
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(captured).toBe(err)
+  })
+
+  test('suppresses logging when log: false (sync)', () => {
+    let captured: unknown
+    const onError = (err: unknown) => {
+      captured = err
+    }
+
+    const err = new Error('silent sync')
+    const result = bestEffort(
+      () => {
+        throw err
+      },
+      {log: false, onError}
+    )
+
+    expect(result).toBeUndefined()
+    expect(spy).not.toHaveBeenCalled()
+    expect(captured).toBe(err)
+  })
+
+  test('suppresses logging when log: false (async)', async () => {
+    let captured: unknown
+    const onError = (err: unknown) => {
+      captured = err
+    }
+
+    const err = new Error('silent async')
+    const result = await bestEffort(
+      async () => {
+        throw err
+      },
+      {log: false, onError}
+    )
+
+    expect(result).toBeUndefined()
+    expect(spy).not.toHaveBeenCalled()
+    expect(captured).toBe(err)
+  })
+
+  test('does not log by default when options is provided without a log property', () => {
+    let captured: unknown
+    const onError = (err: unknown) => {
+      captured = err
+    }
+
+    const err = new Error('default no-log')
+    const result = bestEffort(
+      () => {
+        throw err
+      },
+      {onError}
+    )
+
+    expect(result).toBeUndefined()
+    expect(spy).not.toHaveBeenCalled()
+    expect(captured).toBe(err)
   })
 })

@@ -1,3 +1,4 @@
+import {createLogger} from './logging'
 import {isPlainObject} from './objects'
 
 /**
@@ -45,4 +46,53 @@ export function errorToObject(
 
     return acc
   }, {})
+}
+
+type BestEffortOptions = {
+  onError?: (error: unknown) => void
+  log?: boolean
+}
+
+/**
+ * Executes a callback and swallows any errors, logging them instead of throwing.
+ * Useful for non-critical operations where failure shouldn't break the flow.
+ * Failures are intentionally silent, hence the name "best effort".
+ *
+ * @param cb - Sync or async callback to execute
+ * @param options - Optional settings
+ * @param options.onError - Called alongside logging when an error occurs
+ * @param options.log - When true, logs errors via `log.error` (default: true)
+ * @returns The callback result, or undefined if an error occurred
+ */
+export function bestEffort<T>(
+  cb: () => Promise<T>,
+  options?: BestEffortOptions
+): Promise<T | undefined>
+export function bestEffort<T>(
+  cb: () => T,
+  options?: BestEffortOptions
+): T | undefined
+export function bestEffort<T>(
+  cb: (() => T) | (() => Promise<T>),
+  options?: BestEffortOptions
+) {
+  const log = options?.log ? createLogger() : undefined
+
+  try {
+    const result = cb()
+
+    if (result instanceof Promise) {
+      return result
+        .then(res => res as T)
+        .catch(error => {
+          log?.error('[BEST EFFORT (promise)]', errorToObject(error))
+          options?.onError?.(error)
+        })
+    }
+
+    return result
+  } catch (error) {
+    log?.error('[BEST EFFORT]', errorToObject(error))
+    options?.onError?.(error)
+  }
 }
