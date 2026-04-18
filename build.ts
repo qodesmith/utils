@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+
 import dts from 'bun-plugin-dts'
 
 const start = performance.now()
@@ -33,8 +34,10 @@ await Bun.build({
   // naming: '[name]-[hash].[ext]',
   target: 'bun',
   plugins: [dts()],
-  sourcemap: 'linked'
+  sourcemap: 'linked',
 })
 
 const totalTime = ((performance.now() - start) / 1000).toFixed(2)
+
+// biome-ignore lint/suspicious/noConsole: expected here
 console.log(`Finished building in ${totalTime} seconds`)
