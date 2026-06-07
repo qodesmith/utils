@@ -1,0 +1,18 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src/**/*.ts"],
+  "exclude": ["**/*.test.ts", "src/internal/**"],
+  "out": "docs",
+
+  // Typedoc generates html out of the box. This plugin gives us markdown.
+  "plugin": ["typedoc-plugin-markdown"],
+
+  // Prevent the generated readme from including the root readme contents.
+  "readme": "none",
+
+  // Removes a redundant header. Breadcrumbs are already available on doc pages.
+  "hidePageHeader": true,
+
+  // Function type declarations use a code block instead of a quote.
+  "useCodeBlocks": false
+}
