@@ -1,5 +1,5 @@
-// biome-ignore-all lint/performance/noBarrelFile: needed for this package
-// biome-ignore-all lint/performance/noReExportAll: needed for this package
+// biome-ignore-all lint/performance/noBarrelFile: this barrel file is only needed internally for the build
+// biome-ignore-all lint/performance/noReExportAll: this barrel file is only needed internally for the build
 export * from './src/arrays'
 export * from './src/async'
 export * from './src/colors'
