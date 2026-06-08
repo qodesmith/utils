@@ -135,12 +135,19 @@ describe('bestEffort', () => {
     expect(errorObj?.message).toBe('sync boom')
   })
 
-  test('does not log by default when a sync callback throws', () => {
+  test('logs by default when a sync callback throws', () => {
     const result = bestEffort(() => {
       throw new Error('sync boom')
     })
     expect(result).toBeUndefined()
-    expect(spy).not.toHaveBeenCalled()
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    const logArgs = spy.mock.calls[0]
+    expect(logArgs).toContain('[BEST EFFORT]')
+    const errorObj = logArgs?.find(
+      arg => typeof arg === 'object' && arg !== null && 'message' in arg
+    ) as Record<string, unknown> | undefined
+    expect(errorObj?.message).toBe('sync boom')
   })
 
   test('returns the resolved value from a successful async callback', async () => {
@@ -167,12 +174,19 @@ describe('bestEffort', () => {
     expect(errorObj?.message).toBe('async boom')
   })
 
-  test('does not log by default when an async callback rejects', async () => {
+  test('logs by default when an async callback rejects', async () => {
     const result = await bestEffort(async () => {
       throw new Error('async boom')
     })
     expect(result).toBeUndefined()
-    expect(spy).not.toHaveBeenCalled()
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    const logArgs = spy.mock.calls[0]
+    expect(logArgs).toContain('[BEST EFFORT (promise)]')
+    const errorObj = logArgs?.find(
+      arg => typeof arg === 'object' && arg !== null && 'message' in arg
+    ) as Record<string, unknown> | undefined
+    expect(errorObj?.message).toBe('async boom')
   })
 
   test('returns undefined and logs when a callback returns a rejecting promise and log: true', async () => {
@@ -280,13 +294,13 @@ describe('bestEffort', () => {
     expect(captured).toBe(err)
   })
 
-  test('does not log by default when options is provided without a log property', () => {
+  test('logs by default when options is provided without a log property', () => {
     let captured: unknown
     const onError = (err: unknown) => {
       captured = err
     }
 
-    const err = new Error('default no-log')
+    const err = new Error('default log')
     const result = bestEffort(
       () => {
         throw err
@@ -295,7 +309,7 @@ describe('bestEffort', () => {
     )
 
     expect(result).toBeUndefined()
-    expect(spy).not.toHaveBeenCalled()
+    expect(spy).toHaveBeenCalledTimes(1)
     expect(captured).toBe(err)
   })
 })
