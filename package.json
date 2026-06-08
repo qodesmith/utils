@@ -1,6 +1,6 @@
 {
   "name": "@qodestack/utils",
-  "version": "2.29.0",
+  "version": "3.0.0",
   "description": "Useful utility functions",
   "module": "index.ts",
   "main": "./dist/index.js",
