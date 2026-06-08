@@ -40,8 +40,7 @@ A bunch of utility functions that I use in various projects.
    - This will run a script that automatically generates `index.ts` and compiles `.js` and `.d.ts` assets into the `dist` folder
 1. Commit the new changes to the repo (ensuring no TypeScript errors)
 1. Run `bun pm version minor.` (or `major` if a breaking change)
+1. Log into npm
+   - Run `bun pm whoami` to see if you're authenticated with npm
+   - If you're not authenticated, run `bunx npm login` to do so
 1. Run `bun run publishPackage` to publish to npm
-
-Note: if you get 404 errors when publishing:
-- Run `bun pm whoami` to see if you're authenticated with npm
-- If you're not authenticated, run `bunx npm login` to do so
