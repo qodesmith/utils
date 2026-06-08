@@ -6,7 +6,7 @@
 
 > **bestEffort**\<`T`\>(`cb`, `options?`): `Promise`\<`T` \| `undefined`\>
 
-Defined in: [errors.ts:67](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/errors.ts#L67)
+Defined in: [errors.ts:67](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/errors.ts#L67)
 
 Executes a callback and swallows any errors, logging them instead of throwing.
 Useful for non-critical operations where failure shouldn't break the flow.
@@ -42,7 +42,7 @@ The callback result, or undefined if an error occurred
 
 > **bestEffort**\<`T`\>(`cb`, `options?`): `T` \| `undefined`
 
-Defined in: [errors.ts:71](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/errors.ts#L71)
+Defined in: [errors.ts:71](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/errors.ts#L71)
 
 Executes a callback and swallows any errors, logging them instead of throwing.
 Useful for non-critical operations where failure shouldn't break the flow.

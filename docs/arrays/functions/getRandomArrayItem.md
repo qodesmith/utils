@@ -4,7 +4,7 @@
 
 > **getRandomArrayItem**\<`T`\>(`array`): `T`
 
-Defined in: [arrays.ts:66](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/arrays.ts#L66)
+Defined in: [arrays.ts:66](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/arrays.ts#L66)
 
 Returns a random item from the given array.
 

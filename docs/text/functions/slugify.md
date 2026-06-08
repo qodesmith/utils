@@ -4,7 +4,7 @@
 
 > **slugify**(`text`): `string`
 
-Defined in: [text.ts:41](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/text.ts#L41)
+Defined in: [text.ts:41](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/text.ts#L41)
 
 Provides BASIC slug creation functionality. The result is a url-safe string
 with the following rules:

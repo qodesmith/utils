@@ -6,7 +6,7 @@
 
 > **safeJsonParse**\<`T`\>(`jsonString`): `T` \| `undefined`
 
-Defined in: [json.ts:8](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/json.ts#L8)
+Defined in: [json.ts:19](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/json.ts#L19)
 
 Safely parses a JSON string, returning a default value if parsing fails.
 
@@ -34,7 +34,7 @@ The parsed object of type T, or the default value if parsing fails.
 
 > **safeJsonParse**\<`T`\>(`jsonString`, `defaultValue`): `T`
 
-Defined in: [json.ts:9](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/json.ts#L9)
+Defined in: [json.ts:20](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/json.ts#L20)
 
 Safely parses a JSON string, returning a default value if parsing fails.
 

@@ -1,6 +1,6 @@
 import {beforeEach, describe, expect, spyOn, test} from 'bun:test'
 
-import {bestEffort, errorToObject} from './errors'
+import {bestEffort, catchy, errorToObject, invariant} from './errors'
 
 describe('errorToObject', () => {
   const expectedProperties = [
@@ -297,5 +297,41 @@ describe('bestEffort', () => {
     expect(result).toBeUndefined()
     expect(spy).not.toHaveBeenCalled()
     expect(captured).toBe(err)
+  })
+})
+
+test('catchy', async () => {
+  const promise1 = Promise.resolve(1)
+  const promise2 = Promise.reject(new Error('error'))
+  const promise3 = Promise.reject('nope')
+  const [promise1Val, promise1Error] = await catchy(promise1)
+  const [promise2Val, promise2Error] = await catchy(promise2)
+  const [promise3Val, promise3Error, promise3ErrorVal] = await catchy(promise3)
+
+  expect(promise1Val).toBe(1)
+  expect(promise1Error).toBeNull()
+
+  expect(promise2Val).toBeNull()
+  expect(promise2Error instanceof Error).toBeTrue()
+
+  expect(promise3Val).toBeNull()
+  expect(promise3Error instanceof Error).toBeTrue()
+  expect(promise3ErrorVal).toBe('nope')
+})
+
+describe('invariant', () => {
+  test('narrow the type when the condition is truthy', () => {
+    const value: unknown = 'hello'
+    invariant(typeof value === 'string', 'Value must be a string')
+
+    // TypeScript should know `value` is a string here.
+    expect(value.toUpperCase()).toBe('HELLO')
+  })
+
+  test('throw an error when the condition is falsy', () => {
+    const value: unknown = 42
+    expect(() =>
+      invariant(typeof value === 'string', 'Value must be a string')
+    ).toThrow('Value must be a string')
   })
 })

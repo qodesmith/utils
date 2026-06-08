@@ -1,5 +1,5 @@
-import {createLogger} from './logging'
 import {isPlainObject} from './objects'
+import {createLogger} from './terminal'
 
 /**
  * Converts an Error object into a plain JavaScript object.
@@ -94,5 +94,52 @@ export function bestEffort<T>(
   } catch (error) {
     log?.error('[BEST EFFORT]', errorToObject(error))
     options?.onError?.(error)
+  }
+}
+
+/**
+ * Awaits a promise and returns a tuple instead of throwing, so the caller can
+ * handle errors inline without a try/catch block.
+ *
+ * On success the tuple is `[result, null]`. On failure it is
+ * `[null, Error, originalError]`, where the second item is always an `Error`
+ * instance (wrapping non-Error throws) and the third item is the raw thrown
+ * value.
+ *
+ * @param {Promise<T>} promise - The promise to await.
+ * @returns {Promise<[T, null] | [null, Error, unknown]>} A result/error tuple.
+ *
+ * @example
+ * const [data, error] = await catchy(fetchData())
+ * if (error) return // handle the failure
+ * // `data` is safe to use here
+ */
+export async function catchy<T>(
+  promise: Promise<T>
+): Promise<[T, null] | [null, Error, unknown]> {
+  try {
+    return [await promise, null]
+  } catch (error) {
+    return [
+      null,
+      error instanceof Error ? error : new Error('promise rejected'),
+      error,
+    ]
+  }
+}
+
+/**
+ * Asserts that a condition is truthy, throwing an error if it's not.
+ *
+ * @param {unknown} condition - The condition to check.
+ * @param {string} message - The error message to throw if the condition is falsy.
+ * @throws {Error} Throws an error with the provided message if the condition is falsy.
+ */
+export function invariant(
+  condition: unknown,
+  message: string
+): asserts condition {
+  if (!condition) {
+    throw new Error(message)
   }
 }

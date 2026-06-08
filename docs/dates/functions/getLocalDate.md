@@ -4,7 +4,7 @@
 
 > **getLocalDate**(`timeZone?`): `string`
 
-Defined in: [dates.ts:21](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/dates.ts#L21)
+Defined in: [dates.ts:21](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/dates.ts#L21)
 
 Returns the current date and time as a string in the local format.
 

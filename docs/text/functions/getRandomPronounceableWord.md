@@ -4,7 +4,7 @@
 
 > **getRandomPronounceableWord**(`lenth?`): `string`
 
-Defined in: [text.ts:65](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/text.ts#L65)
+Defined in: [text.ts:65](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/text.ts#L65)
 
 Generates a random pronounceable word by alternating between consonants and
 vowels, starting with a consonant.

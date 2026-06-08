@@ -4,7 +4,7 @@
 
 > **errorToObject**(`error`, `options?`): `Record`\<`string`, `unknown`\>
 
-Defined in: [errors.ts:12](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/errors.ts#L12)
+Defined in: [errors.ts:12](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/errors.ts#L12)
 
 Converts an Error object into a plain JavaScript object.
 This function is useful for serializing Error objects, which may contain

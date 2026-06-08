@@ -4,7 +4,7 @@
 
 > **sanitizeDecimal**(`num`): `string`
 
-Defined in: [numbers.ts:13](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/numbers.ts#L13)
+Defined in: [numbers.ts:13](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/numbers.ts#L13)
 
 Formats a floating-point number to a consistent decimal representation as a
 string. Trims trailing zeros and removes unnecessary decimal points.

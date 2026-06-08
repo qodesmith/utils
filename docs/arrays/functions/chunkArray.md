@@ -4,7 +4,7 @@
 
 > **chunkArray**\<`T`\>(`arr`, `size`): `T`[][]
 
-Defined in: [arrays.ts:15](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/arrays.ts#L15)
+Defined in: [arrays.ts:15](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/arrays.ts#L15)
 
 Chunks an array into smaller arrays of a specified size.
 Works with regular arrays and TypedArrays.

@@ -4,7 +4,7 @@
 
 > **bytesToSize**(`bytes`): `string`
 
-Defined in: [numbers.ts:53](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/numbers.ts#L53)
+Defined in: [numbers.ts:53](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/numbers.ts#L53)
 
 Converts a number of bytes into a human-readable string representation.
 Uses the most appropriate unit (GB, MB, KB, or bytes) based on the size.

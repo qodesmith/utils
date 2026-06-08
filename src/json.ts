@@ -1,4 +1,15 @@
 /**
+ * A recursive type representing any value that is valid JSON.
+ */
+export type JsonData =
+  | string
+  | number
+  | boolean
+  | null
+  | {[key: string]: JsonData}
+  | JsonData[]
+
+/**
  * Safely parses a JSON string, returning a default value if parsing fails.
  *
  * @param jsonString - The JSON string to parse.

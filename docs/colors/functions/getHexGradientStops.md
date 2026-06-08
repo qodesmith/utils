@@ -4,7 +4,7 @@
 
 > **getHexGradientStops**(`__namedParameters`): `string`[]
 
-Defined in: [colors.ts:1](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/colors.ts#L1)
+Defined in: [colors.ts:1](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/colors.ts#L1)
 
 ## Parameters
 

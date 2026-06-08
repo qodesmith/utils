@@ -4,7 +4,7 @@
 
 > **shuffleArray**\<`T`\>(`array`): `T`[]
 
-Defined in: [arrays.ts:44](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/arrays.ts#L44)
+Defined in: [arrays.ts:44](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/arrays.ts#L44)
 
 Shuffles the elements of an array randomly.
 

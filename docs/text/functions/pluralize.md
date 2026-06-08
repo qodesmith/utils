@@ -4,7 +4,7 @@
 
 > **pluralize**(`amount`, `word`, `includeNumber?`): `string`
 
-Defined in: [text.ts:15](https://github.com/qodesmith/utils/blob/454dfeeb7b8c144bcc13726c63d1753237871405/src/text.ts#L15)
+Defined in: [text.ts:15](https://github.com/qodesmith/utils/blob/c8fab201f6be19f3a72a76d2430b77244cece7bb/src/text.ts#L15)
 
 Pluralizes a word based on the given amount.
 
