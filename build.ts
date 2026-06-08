@@ -11,8 +11,13 @@ const contents = Array.from(new Bun.Glob('src/*.ts').scanSync())
   .map(file => `export * from './${file.slice(0, -3)}'`)
   .sort()
 const headerComments = [
+  '///////////////////////////////////////',
+  '// AUTO-GENERATED FILE - DO NOT EDIT //',
+  '///////////////////////////////////////',
+  '',
   '// biome-ignore-all lint/performance/noBarrelFile: this barrel file is only needed internally for the build',
   '// biome-ignore-all lint/performance/noReExportAll: this barrel file is only needed internally for the build',
+  '',
 ].join('\n')
 
 await Bun.write('./index.ts', `${headerComments}\n${contents.join('\n')}\n`)
