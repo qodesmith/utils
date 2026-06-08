@@ -76,7 +76,7 @@ export function bestEffort<T>(
   cb: (() => T) | (() => Promise<T>),
   options?: BestEffortOptions
 ) {
-  const log = options?.log ? createLogger() : undefined
+  const log = options?.log === false ? undefined : createLogger()
 
   try {
     const result = cb()
