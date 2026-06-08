@@ -12,7 +12,7 @@
   "prettier": "@qodestack/prettier-config",
   "scripts": {
     "test": "bun test",
-    "build": "bun run test && bun run build.ts",
+    "build": "bun run test && bun run build.ts && bun run src/internal/copyModuleListToRootReadme.ts",
     "publishPackage": "bun run test && bun run build && bun publish",
     "check": "biome check",
     "check:fix": "biome check --write .",

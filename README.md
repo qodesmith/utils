@@ -16,6 +16,28 @@
 
 A bunch of utility functions that I use in various projects.
 
+<!-- BEGIN UTILITIES -->
+## Modules
+
+- [arrays](docs/arrays/README.md)
+- [async](docs/async/README.md)
+- [colors](docs/colors/README.md)
+- [dates](docs/dates/README.md)
+- [debounce](docs/debounce/README.md)
+- [errors](docs/errors/README.md)
+- [fetchWithProgress](docs/fetchWithProgress/README.md)
+- [fps](docs/fps/README.md)
+- [invariant](docs/invariant/README.md)
+- [json](docs/json/README.md)
+- [logging](docs/logging/README.md)
+- [noop](docs/noop/README.md)
+- [numbers](docs/numbers/README.md)
+- [objects](docs/objects/README.md)
+- [text](docs/text/README.md)
+- [types](docs/types/README.md)
+- [wait](docs/wait/README.md)
+<!-- END UTILITIES -->
+
 ## Steps to adding new features & publishing
 
 1. Add new file or function and test if possible
